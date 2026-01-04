@@ -1,6 +1,6 @@
 const express = require("express");
 const protectRoute = require("../middleware/auth.middleware.js");
-const {getUsersForSideBar, getMessages} = require("../controllers/message.controller.js");
+const {getUsersForSideBar, getMessages, sendMessage} = require("../controllers/message.controller.js");
 
 ///////////////////////////////
 const router = express.Router();
@@ -9,5 +9,6 @@ const router = express.Router();
 
 router.get("/users", protectRoute, getUsersForSideBar);
 router.get("/:id", protectRoute, getMessages);
+router.post("/send/:id", protectRoute, sendMessage);
 
 module.exports = router;

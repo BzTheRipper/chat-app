@@ -2,7 +2,7 @@ CREATE TABLE IF NOT EXISTS messages(
     message_id INT AUTO_INCREMENT PRIMARY KEY,
     senderId INT NOT NULL,
     receiverId INT NOT NULL,
-    text TEXT,
+    textMessages TEXT,
     image TEXT,
 
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,

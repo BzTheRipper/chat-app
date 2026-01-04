@@ -1,13 +1,15 @@
-const getUserExcept = require("../services/getAllUsersIdWithoutMine");
+const getUserExceptMe = require("../services/getAllUsersIdWithoutMine");
 const { findById } = require("../validators/ifExist");
+const gettingSenderAndRecieverMessages = require('../services/getSenderRecieverIdMessages.js');
+const { cloudinary } = require("../lib/cloudinary.js");
 
 const getUsersForSideBar = async (req, res) => {
     try {
-        const loggedInUserId = req.user.user_id;
+        const loggedInUserId_Mine = req.user.user_id;
 
-        const filteredUsers = await getUserExcept(loggedInUserId);
+        const filteredUsersExceptMe = await getUserExceptMe(loggedInUserId_Mine);
 
-        res.status(200).json(filteredUsers);
+        res.status(200).json(filteredUsersExceptMe);
 
     } catch (err) {
         console.log("Error in getUsersForSideBar, message.controller.js", err);
@@ -20,7 +22,9 @@ const getMessages = async (req, res) => {
         const { id: userToChatId } = req.params;
         const myId = req.user.user_id;
 
-        //const messages = 
+        const messages = await gettingSenderAndRecieverMessages(myId, userToChatId);
+
+        res.status(200).json(messages)
 
     } catch (err) {
         console.log("Error in getMessages, message.controller.js", err);
@@ -28,4 +32,35 @@ const getMessages = async (req, res) => {
     }
 };
 
-module.exports = { getUsersForSideBar, getMessages };
+const sendMessage = async (req, res) => {
+    try{
+        const {text, image} = req.body;
+        const {id: receiverId} = req.params;
+        const senderId = req.user.user_id;
+
+        let imageUrl;
+        if(image){
+            const uploadResponse = await cloudinary.uploader.upload(image);
+            imageUrl = uploadResponse.secure_url;
+        }
+
+        const newMessage = new Message({
+            senderId,
+            receiverId,
+            text,
+            image: imageUrl,
+        });
+
+        await newMessage.save();
+
+        // todo: realtime functionality goes here => socket.io
+
+        res.status(201).json(newMessage);
+
+    }catch(err){
+        console.log("Error in message.controller.js, sendMessage", err);
+        res.status(500).json({ErrorMessage:"Internal Server Error inside message.controller.js, sendMessage"})
+    }
+}
+
+module.exports = { getUsersForSideBar, getMessages, sendMessage };

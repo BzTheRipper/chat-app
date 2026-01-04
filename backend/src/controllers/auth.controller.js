@@ -10,6 +10,7 @@ const updateProfilePic = require("../services/updateProfilePic.js");
 let theHashedPass;
 
 const signup = async (req, res) => {
+    // Get fullName, email and password from user in frontend
     const { fullName, email, password } = req.body;
     try {
 
@@ -25,7 +26,7 @@ const signup = async (req, res) => {
 
         // Check if the email is provided
         if (!email) {
-            return res.status(400).json({ message: "Pleas provide your email" });
+            return res.status(400).json({ message: "Please provide your email" });
         }
 
         // Check if the email is valid
@@ -73,7 +74,7 @@ const signup = async (req, res) => {
 const login = async (req, res) => {
     try {
 
-        // Get email and password from user
+        // Get email and password from user in frontend
         const { email, usersLoginPassword } = req.body;
 
 
