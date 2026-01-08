@@ -37,7 +37,9 @@ const signup = async (req, res) => {
         // Check if the email exists in the database
         const userEmailExists = await findByEmail(email);
         if (userEmailExists) {
+            console.log("Email already exists");
             return res.status(400).json({ message: "Email already exists" });
+
         }
 
         if (password.length < 6) {
@@ -75,18 +77,21 @@ const login = async (req, res) => {
     try {
 
         // Get email and password from user in frontend
-        const { email, usersLoginPassword } = req.body;
+        const { email, password } = req.body;
+
 
 
         // Check if the user email exists
         const userEmailExists = await findByEmail(email);
         if (!userEmailExists) {
+            console.log("Invalid Credentials");
             return res.status(400).json({ message: "Invalid Credentials" });
         }
 
-        const isPasswordCorrect = await bcrypt.compare(usersLoginPassword, userEmailExists.password);
+        const isPasswordCorrect = await bcrypt.compare(password, userEmailExists.password);
 
         if (!isPasswordCorrect) {
+            console.log("Invalid Credentials");
             return res.status(400).json({ message: "Invalid Credentials" });
         }
 
