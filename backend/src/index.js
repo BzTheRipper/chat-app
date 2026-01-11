@@ -8,23 +8,23 @@ const createUserTable = require("./models/user.model.js");
 const cookieParser = require("cookie-parser");
 const createMessageShcema = require("./models/message.model.js");
 const cors = require("cors");
-
-const app = express();
+const {app, server} = require("./lib/socket.js");
 
 const PORT = process.env.DB_PORT;
+const FRONTEDND_PORT = process.env.FRONTEDND_PORT;
 
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: `http://localhost:${FRONTEDND_PORT}`,
     credentials: true,
     
 }))
 
 app.use("/api/auth", authRoutes);
-app.use("/api/message", messageRoutes)
+app.use("/api/messages", messageRoutes)
 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
     console.log(`Sign Up on: http://localhost:${PORT}/api/auth/signup`);
     console.log(`Login on: http://localhost:${PORT}/api/auth/login`);

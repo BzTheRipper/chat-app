@@ -4,7 +4,7 @@ const fs = require('fs/promises');
 
 async function gettingSenderAndRecieverMessages(myId, userToChatId) {
     const connect = await connect_TO_DB();
-    await connect.changeUser({database: "chatapp"});
+    await connect.changeUser({ database: "chatapp" });
 
     const readMessageSenderAndRecieverIdSchema = await fs.readFile(path.join(__dirname, "../schemas/getSenderAndRecieverIdSchema.sql"), "utf8");
 

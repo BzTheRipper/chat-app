@@ -1,0 +1,107 @@
+@import url(styleDelays.css);
+@import url(colors.css);
+
+:root {
+  --btn-radius: 30px; /* Added missing semicolon */
+}
+
+/* ================= VIPER STYLE ================= */
+.btnStyleViper {
+  background-color: var(--viper-blood-green);
+  color: var(--secondary-text-color-black) !important;
+  border-color: var(--secondary-text-color-black);
+  transform: translateX(3px) scale(1);
+  transition: color var(--delay-trans) ease, transform var(--delay-trans) ease;
+  padding: 10px 20px;
+  border-radius: var(--btn-radius);
+  font-weight: normal;
+}
+
+.btnStyleViper:hover {
+  transform: translateY(-3px) translateX(3px) scale(1.1);
+  background-color: var(--viper-blood-green);
+  color: var(--secondary-text-color-black) !important;
+  border-color: var(--secondary-text-color-black);
+  box-shadow: var(--glow-box-shadow-color-control-mid);
+  font-weight: normal;
+}
+
+/* FIXED SELECTOR NAME */
+.btnStyleViper:focus,
+.btnStyleViper:active,
+.btnStyleViper:focus:active {
+  border-color: black !important;
+  box-shadow: none !important;
+  outline: none !important;
+  background-color: var(--primary-text-color);
+  
+}
+
+
+/* ================= VAMPIRE STYLE ================= */
+.btnStyleVampire {
+  background-color: var(--red-background-color-var);
+  color: var(--primary-text-color) !important;
+  border-color: black !important;
+  transform: translateX(3px) scale(1);
+  transition: color var(--delay-trans) ease, transform var(--delay-trans) ease;
+  padding: 10px 20px;
+  border-radius: var(--btn-radius);
+  text-decoration: none;
+  font-weight: normal;
+}
+
+.btnStyleVampire:hover {
+  transform: translateY(-3px) translateX(3px) scale(1.1);
+  background-color: var(--red-background-color-var);
+  color: var(--primary-text-color) !important;
+  /* Removed the conflicting 'black !important' border so the one below works */
+  border-color: var(--secondary-text-color-black) !important; 
+  box-shadow: var(--glow-box-shadow-color-control-mid);
+  font-weight: normal;
+}
+
+/* FIXED SELECTOR NAME */
+.btnStyleVampire:focus,
+.btnStyleVampire:active,
+.btnStyleVampire:focus:active {
+  border-color: black !important;
+  box-shadow: none !important;
+  outline: none !important;
+  background-color: var(--primary-text-color);
+}
+
+
+/* ================= WHITE STYLE ================= */
+.btnStyleWhite {
+  background-color: var(--white-background-color-var);
+  /* You successfully changed the text color here */
+  color: var(--red-background-color-var) !important; 
+  border-color: black !important;
+  transform: translateX(3px) scale(1);
+  transition: color var(--delay-trans) ease, transform var(--delay-trans) ease;
+  padding: 10px 20px;
+  border-radius: var(--btn-radius);
+  text-decoration: none;
+  font-weight: normal;
+}
+
+.btnStyleWhite:hover {
+  transform: translateY(-3px) translateX(3px) scale(1.1);
+  background-color: var(--white-background-color-var);
+  color: var(--red-background-color-var) !important;
+  border-color: var(--secondary-text-color-black);
+  box-shadow: var(--glow-box-shadow-color-control-mid);
+  font-weight: normal;
+}
+
+/* FIXED SELECTOR NAME */
+.btnStyleWhite:focus,
+.btnStyleWhite:active,
+.btnStyleWhite:focus:active {
+  border-color: black !important;
+  box-shadow: none !important;
+  outline: none !important;
+  background-color: var(--primary-text-color);
+  font-weight: normal;
+}

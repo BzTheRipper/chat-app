@@ -135,7 +135,7 @@ const updateProfile = async (req, res) => {
             uploadResponse.secure_url
         );
         console.log(updatedUser);
-        res.status(200).json({message: "successfully updated the profile picture", updatedUser});
+        res.status(200).json({message: "Successfully updated the profile picture", updatedUser});
 
     } catch (err) {
         console.log("Error in updateProfile", err);

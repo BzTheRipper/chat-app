@@ -1,4 +1,4 @@
-SELECT textMessages FROM messages
+SELECT * FROM messages
 WHERE
     (senderId = ? AND receiverId = ?)
     OR

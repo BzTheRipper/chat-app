@@ -7,15 +7,24 @@ import SignUpPage from './pages/SignUpPage'
 import LogInPage from './pages/LogInPage'
 import ProfilePage from './pages/ProfilePage'
 import { useAuthStore } from './store/useAuthStore'
+import { useThemeStore } from "./store/useThemeStore";
 import {Loader} from "lucide-react"
 import {Toaster} from "react-hot-toast";
 
-export default function App() {
-  const {authUser, checkAuth, isCheckingAuth} = useAuthStore();
 
+export default function App() {
+  const {authUser, checkAuth, isCheckingAuth, onlineUsers} = useAuthStore();
+  const { theme } = useThemeStore();
+
+  console.log("The onlineUsers", onlineUsers);
+  
   useEffect(() => {
     checkAuth()
   }, [checkAuth]);
+
+  useEffect(() => {
+  if (authUser) useAuthStore.getState().connectSocket();
+}, [authUser]);
 
   console.log("The authUser variable value is:",{authUser});
 
@@ -27,7 +36,7 @@ export default function App() {
 
 
   return (
-    <div>
+    <div data-theme={theme}>
       <Navbar />
 
       <Routes>
